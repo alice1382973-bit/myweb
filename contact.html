@@ -1,385 +1,62 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>商品諮詢｜只想睡覺企業社</title>
+<form action="https://formspree.io/f/maeebrwz" method="POST">
 
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+    <div class="form-group">
+        <label for="customerName">姓名 *</label>
+        <input
+            id="customerName"
+            name="姓名"
+            type="text"
+            required
+            placeholder="請輸入您的姓名">
+    </div>
 
-<style>
-:root {
-    --bg: #fcf9f5;
-    --card: #fff;
-    --accent: #9e7b5f;
-    --hover: #87674e;
-    --soft: #eedecc;
-    --ink: #3d352a;
-    --muted: #8c8275;
-    --line: #f0e6dc;
-    --shadow: 0 20px 40px rgba(158,123,95,.08);
-}
+    <div class="form-group">
+        <label for="phone">聯絡電話 *</label>
+        <input
+            id="phone"
+            name="聯絡電話"
+            type="tel"
+            required
+            placeholder="例如：0912-345-678">
+    </div>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Zen Maru Gothic','PingFang TC',sans-serif;
-}
+    <div class="form-group">
+        <label for="email">電子郵件 *</label>
+        <input
+            id="email"
+            name="Email"
+            type="email"
+            required
+            placeholder="例如：yourname@email.com">
+    </div>
 
-body {
-    background: var(--bg);
-    color: var(--ink);
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-}
+    <div class="form-group">
+        <label for="topic">諮詢類別</label>
+        <select id="topic" name="諮詢類別">
+            <option value="商品資訊">商品資訊</option>
+            <option value="尺寸與規格">尺寸與規格</option>
+            <option value="訂購與配送">訂購與配送</option>
+            <option value="售後服務">售後服務</option>
+            <option value="其他問題">其他問題</option>
+        </select>
+    </div>
 
-nav {
-    max-width: 1000px;
-    width: 100%;
-    margin: auto;
-    padding: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
+    <div class="form-group">
+        <label for="message">想詢問的內容 *</label>
+        <textarea
+            id="message"
+            name="訊息內容"
+            required
+            placeholder="請描述想詢問的商品、尺寸或其他需求……"></textarea>
+    </div>
 
-.logo {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--accent);
-    text-decoration: none;
-    letter-spacing: 1px;
-}
+    <input type="hidden" name="_subject"
+        value="只想睡覺企業社｜網站收到新的商品諮詢">
 
-.nav-links {
-    display: flex;
-    gap: 26px;
-    list-style: none;
-}
+    <input type="hidden" name="_replyto" id="replyto">
 
-.nav-links a {
-    text-decoration: none;
-    color: var(--muted);
-    font-size: .95rem;
-}
+    <button class="submit-btn" type="submit">
+        送出諮詢 ✉️
+    </button>
 
-.nav-links a:hover,
-.nav-links a.active {
-    color: var(--accent);
-    font-weight: 700;
-}
-
-.container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 20px 30px 60px;
-}
-
-.section-title {
-    text-align: center;
-    color: var(--accent);
-    font-size: 1.8rem;
-    margin: 12px 0;
-}
-
-.section-desc {
-    text-align: center;
-    color: var(--muted);
-    line-height: 1.9;
-    margin: 0 auto 38px;
-    max-width: 680px;
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap: 20px;
-    margin-bottom: 42px;
-}
-
-.product-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 22px;
-    padding: 26px 22px;
-    text-align: center;
-    box-shadow: var(--shadow);
-}
-
-.product-icon {
-    font-size: 2.2rem;
-    margin-bottom: 10px;
-}
-
-.product-card h3 {
-    color: var(--accent);
-    margin-bottom: 8px;
-    font-size: 1.1rem;
-}
-
-.product-card p {
-    color: var(--muted);
-    font-size: .92rem;
-    line-height: 1.8;
-}
-
-.contact-container {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 28px;
-    padding: 42px;
-    box-shadow: var(--shadow);
-    max-width: 760px;
-    margin: 0 auto 45px;
-}
-
-.contact-container h1 {
-    color: var(--accent);
-    font-size: 1.45rem;
-    margin-bottom: 10px;
-}
-
-.subtitle {
-    color: var(--muted);
-    font-size: .95rem;
-    line-height: 1.8;
-    margin-bottom: 25px;
-}
-
-.notice-box {
-    background: #fdf5f0;
-    border: 1px solid #f2ded2;
-    border-radius: 16px;
-    padding: 18px 22px;
-    margin-bottom: 28px;
-    color: #8c6347;
-    font-size: .92rem;
-    line-height: 1.8;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 700;
-    font-size: .94rem;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 13px 16px;
-    border: 1px solid var(--line);
-    border-radius: 13px;
-    background: var(--bg);
-    color: var(--ink);
-    font-size: .95rem;
-    outline: none;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    border-color: var(--accent);
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(158,123,95,.1);
-}
-
-.form-group textarea {
-    min-height: 130px;
-    resize: vertical;
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 15px;
-    background: var(--accent);
-    color: #fff;
-    border: 0;
-    border-radius: 30px;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: .25s;
-}
-
-.submit-btn:hover {
-    background: var(--hover);
-    transform: translateY(-2px);
-}
-
-footer {
-    text-align: center;
-    padding: 30px 20px;
-    color: var(--muted);
-    font-size: .85rem;
-    border-top: 1px solid var(--line);
-}
-
-@media(max-width:600px) {
-    nav {
-        padding: 22px 18px;
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .nav-links {
-        gap: 18px;
-        flex-wrap: wrap;
-    }
-
-    .container {
-        padding: 18px 18px 45px;
-    }
-
-    .contact-container {
-        padding: 28px 20px;
-    }
-
-    .section-title {
-        font-size: 1.5rem;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<!-- 導覽列 -->
-<nav>
-    <a href="index.html" class="logo">🌙 只想睡覺企業社</a>
-
-    <ul class="nav-links">
-        <li><a href="index.html">首頁</a></li>
-        <li><a href="about.html">關於我們</a></li>
-        <li><a href="contact.html" class="active">商品諮詢</a></li>
-    </ul>
-</nav>
-
-<!-- 網頁內容 -->
-<main class="container">
-
-    <h2 class="section-title">☁️ 找到你的舒服睡眠</h2>
-
-    <p class="section-desc">
-        從寢具挑選、商品規格到訂購問題，都歡迎與我們聯繫。<br>
-        把每天的休息時間，變成最期待的小確幸。
-    </p>
-
-    <!-- 商品介紹 -->
-    <section class="product-grid">
-
-        <article class="product-card">
-            <div class="product-icon">🛏️</div>
-            <h3>舒適寢具</h3>
-            <p>為日常睡眠挑選合適的床包、被套與寢具用品。</p>
-        </article>
-
-        <article class="product-card">
-            <div class="product-icon">🌙</div>
-            <h3>柔軟被枕</h3>
-            <p>依照個人習慣，了解枕頭、棉被及睡眠用品資訊。</p>
-        </article>
-
-        <article class="product-card">
-            <div class="product-icon">💌</div>
-            <h3>訂購與售後</h3>
-            <p>商品庫存、配送方式或訂單問題，都可以透過表單詢問。</p>
-        </article>
-
-    </section>
-
-    <!-- 聯絡表單 -->
-    <section class="contact-container">
-
-        <h1>線上商品諮詢表單</h1>
-
-        <p class="subtitle">
-            請留下您的聯絡資料與需求，我們收到訊息後將盡快與您聯繫。
-        </p>
-
-        <div class="notice-box">
-            💡 <strong>貼心提醒：</strong>
-            送出表單後，請確認電子郵件及電話資料正確。
-            如有指定商品、尺寸或款式，也可以在訊息欄位中註明。
-        </div>
-
-        <form action="https://formspree.io/f/maeebrwz" method="POST">
-
-            <div class="form-group">
-                <label for="customerName">姓名 *</label>
-                <input
-                    id="customerName"
-                    name="姓名"
-                    type="text"
-                    required
-                    placeholder="請輸入您的姓名">
-            </div>
-
-            <div class="form-group">
-                <label for="phone">聯絡電話 *</label>
-                <input
-                    id="phone"
-                    name="聯絡電話"
-                    type="tel"
-                    required
-                    placeholder="例如：0912-345-678">
-            </div>
-
-            <div class="form-group">
-                <label for="email">電子郵件 *</label>
-                <input
-                    id="email"
-                    name="Email"
-                    type="email"
-                    required
-                    placeholder="例如：yourname@email.com">
-            </div>
-
-            <div class="form-group">
-                <label for="topic">諮詢類別</label>
-                <select id="topic" name="諮詢類別">
-                    <option value="商品資訊">商品資訊</option>
-                    <option value="尺寸與規格">尺寸與規格</option>
-                    <option value="訂購與配送">訂購與配送</option>
-                    <option value="售後服務">售後服務</option>
-                    <option value="其他問題">其他問題</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="message">想詢問的內容 *</label>
-                <textarea
-                    id="message"
-                    name="訊息內容"
-                    required
-                    placeholder="請描述想詢問的商品、尺寸或其他需求……"></textarea>
-            </div>
-
-            <input
-                type="hidden"
-                name="_subject"
-                value="只想睡覺企業社｜網站收到新的商品諮詢">
-
-            <button class="submit-btn" type="submit">
-                送出諮詢 ✉️
-            </button>
-
-        </form>
-
-    </section>
-
-</main>
-
-<footer>
-    © 只想睡覺企業社｜讓每一天，都從好好睡覺開始。
-</footer>
-
-</body>
-</html>
+</form>
