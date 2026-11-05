@@ -2,81 +2,115 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>聯絡我們｜只想睡覺幸福企業社</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>聯絡我們｜只想睡覺幸福企業社</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- EmailJS 官方瀏覽器套件 -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@5/dist/email.min.js"></script>
 </head>
 <body>
 
 <header>
-    <h2>☁ 只想睡覺幸福企業社</h2>
-    <nav>
-        <a href="index.html">首頁</a>
-        <a href="about.html">公司介紹</a>
-        <a href="contact.html">聯絡我們</a>
-    </nav>
+  <h2>☁ 只想睡覺幸福企業社</h2>
+  <nav>
+    <a href="index.html">首頁</a>
+    <a href="about.html">公司介紹</a>
+    <a href="contact.html">聯絡我們</a>
+  </nav>
 </header>
 
 <section class="page-banner">
-    <h1>聯絡我們</h1>
-    <p>CONTACT US</p>
+  <h1>聯絡我們</h1>
+  <p>CONTACT US</p>
 </section>
 
 <section class="contact-section">
+  <h2>歡迎與我們聯絡 ♡</h2>
+  <p>有任何床具用品問題或合作需求，都歡迎留言。</p>
 
-    <h2>歡迎與我們聯絡 ♡</h2>
-    <p>如果您有任何商品問題或合作需求，歡迎填寫以下表單。</p>
+  <form id="contact-form">
+    <label for="name">姓名 *</label>
+    <input id="name" type="text" name="name"
+           placeholder="請輸入姓名" required>
 
-    <form action="https://formsubmit.co/alice1382973@gmail.com"
-          method="POST">
+    <label for="phone">電話 *</label>
+    <input id="phone" type="tel" name="phone"
+           placeholder="請輸入聯絡電話" required>
 
-        <!-- 郵件主旨 -->
-        <input type="hidden" name="_subject"
-               value="只想睡覺幸福企業社－網站聯絡表單">
+    <label for="email">Email *</label>
+    <input id="email" type="email" name="email"
+           placeholder="請輸入電子郵件" required>
 
-        <!-- 郵件格式 -->
-        <input type="hidden" name="_template" value="table">
+    <label for="message">聯絡內容 *</label>
+    <textarea id="message" name="message" rows="6"
+              placeholder="請輸入聯絡內容" required></textarea>
 
-        <!-- 防止垃圾郵件 -->
-        <input type="text" name="_honey"
-               style="display:none">
+    <button id="submit-button" type="submit" class="btn">
+      送出聯絡表單
+    </button>
 
-        <label>姓名 *</label>
-        <input type="text" name="姓名"
-               placeholder="請輸入姓名" required>
+    <p id="form-status" role="status" aria-live="polite"></p>
+  </form>
 
-        <label>電話 *</label>
-        <input type="tel" name="電話"
-               placeholder="請輸入聯絡電話" required>
-
-        <label>Email *</label>
-        <input type="email" name="Email"
-               placeholder="請輸入電子郵件" required>
-
-        <label>聯絡內容 *</label>
-        <textarea name="聯絡內容"
-                  rows="6"
-                  placeholder="請輸入您想詢問的內容"
-                  required></textarea>
-
-        <button type="submit" class="btn">
-            送出聯絡表單
-        </button>
-
-    </form>
-
-    <p class="email-info">
-        聯絡信箱：alice1382973@gmail.com
-    </p>
-
+  <p class="email-info">
+    收件信箱：alice1382973@gmail.com
+  </p>
 </section>
 
 <footer>
-    <p>© 2026 只想睡覺幸福企業社</p>
-    <p>讓好眠成為生活中的小幸福 ♡</p>
+  <p>© 2026 只想睡覺幸福企業社</p>
+  <p>讓好眠成為生活中的小幸福 ♡</p>
 </footer>
+
+<script>
+  // 請換成 EmailJS 帳號內的實際設定值
+  const SERVICE_ID = "YOUR_SERVICE_ID";
+  const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+  const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+
+  const form = document.getElementById("contact-form");
+  const button = document.getElementById("submit-button");
+  const status = document.getElementById("form-status");
+
+  form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    button.disabled = true;
+    button.textContent = "郵件寄送中，請稍候...";
+    status.textContent = "";
+
+    try {
+      const response = await emailjs.sendForm(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        form,
+        { publicKey: PUBLIC_KEY }
+      );
+
+      if (response.status === 200) {
+        status.textContent =
+          "表單已成功送交郵件服務！請再確認收件信箱是否收到郵件。";
+        status.style.color = "green";
+        form.reset();
+      } else {
+        throw new Error("郵件服務未確認成功，請稍後再試。");
+      }
+    } catch (error) {
+      console.error("EmailJS 寄送錯誤：", error);
+
+      status.textContent =
+        "寄送失敗，請確認 EmailJS 設定、郵件範本及網路連線後再試。";
+      status.style.color = "red";
+    } finally {
+      button.disabled = false;
+      button.textContent = "送出聯絡表單";
+    }
+  });
+</script>
 
 </body>
 </html>
-
